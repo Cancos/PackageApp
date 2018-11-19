@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { PackageService } from './service/package-service.service';
+import { Project } from './models/project-model';
+import { Dependency } from './models/dependency-model';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'package-app';
+
+  private selectedProject: Project;
+  public tempName;
+  
+  constructor(private packageService: PackageService) {
+    this.packageService.init();
+  }
+
+  updateSelectedProject(selectedProject) {
+    this.selectedProject = selectedProject;
+  }
 }
